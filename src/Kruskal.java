@@ -17,6 +17,7 @@ public class Kruskal {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //comment
     }
     
 }
