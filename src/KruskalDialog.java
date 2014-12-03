@@ -1,3 +1,7 @@
+
+
+import java.util.List;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,28 +32,29 @@ public class KruskalDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        DisplayGraphButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        FindMSTButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAutoRequestFocus(false);
-        setMinimumSize(new java.awt.Dimension(500, 1000));
+        setMinimumSize(new java.awt.Dimension(0, 550));
+        setType(java.awt.Window.Type.UTILITY);
 
         jTextField1.setText("graph1.txt");
         jTextField1.setToolTipText("enter filename of graph file");
 
-        jButton1.setText("Load Graph");
-        jButton1.addChangeListener(new javax.swing.event.ChangeListener() {
+        DisplayGraphButton.setText("Display Graph");
+        DisplayGraphButton.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jButton1StateChanged(evt);
+                DisplayGraphButtonStateChanged(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        DisplayGraphButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                DisplayGraphButtonActionPerformed(evt);
             }
         });
 
@@ -59,10 +64,11 @@ public class KruskalDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Kruskal's MST Finder");
 
-        jButton2.setText("Draw Graph");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        FindMSTButton.setText("Find Minimum Spanning Tree");
+        FindMSTButton.setToolTipText("");
+        FindMSTButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                FindMSTButtonActionPerformed(evt);
             }
         });
 
@@ -80,9 +86,9 @@ public class KruskalDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(DisplayGraphButton)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(FindMSTButton))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -95,8 +101,8 @@ public class KruskalDialog extends javax.swing.JDialog {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(DisplayGraphButton)
+                    .addComponent(FindMSTButton))
                 .addGap(13, 13, 13)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addContainerGap())
@@ -105,21 +111,25 @@ public class KruskalDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jButton1StateChanged
+    private void DisplayGraphButtonStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_DisplayGraphButtonStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1StateChanged
+    }//GEN-LAST:event_DisplayGraphButtonStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void DisplayGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayGraphButtonActionPerformed
+        jTextArea1.setText("");
         String s = jTextField1.getText();
         SimpleGraph G = Kruskal.LoadGraph(s);
-        jTextArea1.append(Kruskal.InspectGraph(G).toString());
-    }//GEN-LAST:event_jButton1ActionPerformed
+        jTextArea1.append(Kruskal.InspectGraph(G).toString());     
+    }//GEN-LAST:event_DisplayGraphButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void FindMSTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindMSTButtonActionPerformed
+        jTextArea1.setText("");
         String s = jTextField1.getText();
-        SimpleGraph G = Kruskal.LoadGraph(s);        
-        gsCoreKruskal.DrawGraph(G);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        SimpleGraph G = Kruskal.LoadGraph(s);
+        //jTextArea1.append(Kruskal.InspectGraph(G).toString());
+        //run Kruskals Algorithm to generate the MST edges
+        jTextArea1.append(Kruskal.EvaluateMST(Kruskal.KruskalsAlgorithm(G)).toString());
+    }//GEN-LAST:event_FindMSTButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,8 +174,8 @@ public class KruskalDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton DisplayGraphButton;
+    private javax.swing.JButton FindMSTButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
