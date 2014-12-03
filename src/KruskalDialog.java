@@ -44,7 +44,7 @@ public class KruskalDialog extends javax.swing.JDialog {
         setType(java.awt.Window.Type.UTILITY);
 
         jTextField1.setText("graph1.txt");
-        jTextField1.setToolTipText("enter filename of graph file");
+        jTextField1.setToolTipText("enter path to graph file");
 
         DisplayGraphButton.setText("Display Graph");
         DisplayGraphButton.addChangeListener(new javax.swing.event.ChangeListener() {
